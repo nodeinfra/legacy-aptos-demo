@@ -13,9 +13,8 @@ def main():
 	# 0x863e6d2f9aaa418b253d037a61027ecb9041f31d8d419f1819d83b26f43e16bb
 	# 0xa06235f755cb24eb896eb617d3fa7c8f372f04cc674d39c18da545b380b94277
  
-	button = st.button('Brows it!')
-	URL = 'http://223.130.135.191:3000/rpc/get_token_balances?target_address='
-	get_token_metadata_URL = 'http://223.130.135.191:3000/rpc/get_token_metadata?token_contract='
+	button = st.button('Browse it!')
+	URL = 'http://223.130.135.191:3000/rpc/get_nft_balances?owner_hash='
 	URL = URL + input_address
 	num = 0
 	if button:
@@ -29,7 +28,7 @@ def main():
 				break
 		for token_id in token_id_list:
 			
-			get_token_metadata_URL = 'http://223.130.135.191:3000/rpc/get_token_metadata?token_contract='
+			get_token_metadata_URL = 'http://223.130.135.191:3000/rpc/get_nft_metadata?nft_hash='
 			get_token_metadata_URL += token_id
 
    
