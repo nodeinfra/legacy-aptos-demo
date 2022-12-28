@@ -8,6 +8,7 @@ example_address = "0xa06235f755cb24eb896eb617d3fa7c8f372f04cc674d39c18da545b380b
 	# good examples
 	# 0x863e6d2f9aaa418b253d037a61027ecb9041f31d8d419f1819d83b26f43e16bb
 	# 0xa06235f755cb24eb896eb617d3fa7c8f372f04cc674d39c18da545b380b94277
+	# 0x87c5241e5d6eb8ba7cd45684e978c8b61d78041662d1c209491104593a60455e
 COLUMN_SIZE = 3
 
 def main():
@@ -35,7 +36,7 @@ def main():
 			token_id_list.append(token['token_data_id_hash'])
 			if num > 20:
 				break
-		for token_id in token_id_list:
+		for i, token_id in enumerate(token_id_list):
 			response = requests.get(api_address+get_nft_metadata, params={'nft_hash':token_id})
 			json_data = response.json()[0]
 			if slow_images:
@@ -49,18 +50,16 @@ def main():
 			
 
 
-			metadata_list.append(json_data)
-
 			# st.text(json_data['collection_name'])
 			# st.text(json_data['name'])
 			# st.image(json_data['metadata_uri'])
 			# st.image('https://cloudflare-ipfs.com/ipfs/QmQ7m9tAFapj13h55u9iRQ4FtaiTAKtSFSgY3As47DMvfu\n')
-		for i, metadata in enumerate(metadata_list):
+
 			if i % COLUMN_SIZE == 0:
 				col_list = st.columns(COLUMN_SIZE)
 			#col_list[i%COLUMN_SIZE].text(metadata['collection_name'])
-			col_list[i%COLUMN_SIZE].text(metadata['name'])
-			col_list[i%COLUMN_SIZE].image(metadata['metadata_uri'])
+			col_list[i%COLUMN_SIZE].text(json_data['name'])
+			col_list[i%COLUMN_SIZE].image(json_data['metadata_uri'])
 			# print(metadata)
 if __name__ == "__main__":
 	main()  
